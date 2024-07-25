@@ -8,7 +8,7 @@
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
                 <h1 class="app-page-title">Add User</h1>
-                <a class="btn btn-primary btn-sm text-white" href="create.php" role="button"> Manage Users </a>
+                <a class="btn btn-primary btn-sm text-white" href="index.php" role="button"> Manage Users </a>
                 <hr class="mb-4">
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-6">
