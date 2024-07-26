@@ -11,7 +11,7 @@
                 <a class="btn btn-primary btn-sm text-white" href="index.php" role="button"> Manage Users </a>
                 <hr class="mb-4">
                 <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-12">
                         <div class="app-card app-card-settings shadow-sm p-4">
 
                             <div class="app-card-body">
@@ -19,7 +19,7 @@
                                 if(isset($_GET['id'])){
                                     $id =$_GET['id'];
 
-                                    $select= "SELECT *FROM users WHERE id =$id";
+                                    $select= "SELECT *FROM services WHERE id =$id";
                                     $result = mysqli_query($conn, $select);
                                     $data=mysqli_fetch_assoc($result);
                                 }
@@ -28,20 +28,16 @@
 
                                 <form class="settings-form" method="POST" enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="setting-input-1" class="form-label"> Name</label>
-                                        <input type="text" name="name" readonly class="form-control" id="setting-input-1" value="<?php echo $data['name']; ?>" >
+                                        <label for="setting-input-1" class="form-label"> Icon</label>
+                                        <input type="text" name="icon" readonly class="form-control" id="setting-input-1" value="<?php echo $data['icon']; ?>" >
                                     </div>
                                     <div class="mb-3">
-                                        <label for="setting-input-2" class="form-label">Contact </label>
-                                        <input type="text" name="phone" readonly class="form-control" id="setting-input-2" value="<?php echo $data['phone']; ?>" >
+                                        <label for="setting-input-2" class="form-label">Title </label>
+                                        <input type="text" name="title" readonly class="form-control" id="setting-input-2" value="<?php echo $data['title']; ?>" >
                                     </div>
                                     <div class="mb-3">
-                                        <label for="setting-input-3" class="form-label"> Address</label>
-                                        <input type="text" name="address"readonly  class="form-control" id="setting-input-3" value="<?php echo $data['address']; ?>">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="setting-input-3" class="form-label"> Email </label>
-                                        <input type="email" name="email" readonly class="form-control" id="setting-input-3" value="<?php echo $data['email']; ?>">
+                                        <label for="setting-input-3" class="form-label"> Description</label>
+                                        <input type="text" name="description"readonly  class="form-control" id="setting-input-3" value="<?php echo $data['description']; ?>">
                                     </div>
                                 </form>
                             </div><!--//app-card-body-->

@@ -7,30 +7,36 @@
 
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-                <h1 class="app-page-title">Add User</h1>
-                <a class="btn btn-primary btn-sm text-white" href="index.php" role="button"> Manage Users </a>
+                <h1 class="app-page-title">Add service</h1>
+                <a class="btn btn-primary btn-sm text-white" href="index.php" role="button"> Manage services </a>
                 <hr class="mb-4">
                 <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-12">
                         <div class="app-card app-card-settings shadow-sm p-4">
 
                             <div class="app-card-body">
                                 <?php
-                                if (isset($_POST['save'])) {
-                                    $name = $_POST['name'];
-                                    $phone = $_POST['phone'];
-                                    $address = $_POST['address'];
-                                    $email = $_POST['email'];
-                                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT) ;
+                                if(isset($_GET['id'])){
+                                    $id =$_GET['id'];
 
-                                    if ($name == "" || $phone == "" || $address == "" || $email == "" || $password == "") {
+                                    $select= "SELECT *FROM services WHERE id =$id";
+                                    $result = mysqli_query($conn, $select);
+                                    $data=mysqli_fetch_assoc($result);
+                                }
+
+                                if (isset($_POST['save'])) {
+                                    $icon = $_POST['icon'];
+                                    $title = $_POST['title'];
+                                    $description = $_POST['description'];
+
+                                    if ($icon == "" || $title == "" || $description == "" ) {
                                         echo "<div class='alert alert-danger'>All fields are Required</div>";
                                         echo "<meta http-equiv=\"refresh\" content=\"2;URL=create.php\">";
                                     } else {
-                                        $insert = "INSERT INTO users (name, phone, address, email, password) VALUES ('$name', '$phone', '$address', '$email', '$password')";
+                                        $insert = "UPDATE services SET icon= '$icon', title ='$title', description='$description' WHERE id=$id";
                                         $result = mysqli_query($conn, $insert);
                                         if ($result) {
-                                            echo '<div class="alert alert-success">User added successfully</div>';
+                                            echo '<div class="alert alert-success">service udated successfully</div>';
                                             // header("Location: index.php");
                                             echo "<meta http-equiv=\"refresh\" content=\"2;URL=index.php\">";
                                         } else {
@@ -44,24 +50,16 @@
 
                                 <form class="settings-form" method="POST" enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="setting-input-1" class="form-label"> Name</label>
-                                        <input type="text" name="name" class="form-control" id="setting-input-1" value="" >
+                                        <label for="setting-input-1" class="form-label"> Icon</label>
+                                        <input type="text" name="icon" class="form-control" id="setting-input-1" value="<?php echo $data['icon']; ?>" placeholder="e.g. fa-solid fa-users" >
                                     </div>
                                     <div class="mb-3">
                                         <label for="setting-input-2" class="form-label">Contact </label>
-                                        <input type="text" name="phone" class="form-control" id="setting-input-2" value="" >
+                                        <input type="text" name="title" class="form-control" id="setting-input-2" value="<?php echo $data['title']; ?>" >
                                     </div>
                                     <div class="mb-3">
                                         <label for="setting-input-3" class="form-label"> Address</label>
-                                        <input type="text" name="address" class="form-control" id="setting-input-3" value="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="setting-input-3" class="form-label"> Email </label>
-                                        <input type="email" name="email" class="form-control" id="setting-input-3" value="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="setting-input-3" class="form-label"> Password </label>
-                                        <input type="password" name="password" class="form-control" id="setting-input-3" value="">
+                                        <input type="text" name="description" class="form-control" id="setting-input-3" value="<?php echo $data['description']; ?>">
                                     </div>
                                     <button type="submit" name="save" class="btn app-btn-primary">Save Changes</button>
                                 </form>

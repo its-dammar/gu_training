@@ -57,7 +57,7 @@
 						<div class="app-card app-card-orders-table shadow-sm mb-5">
 							<div class="app-card-body">
 								<div class="p-3">
-									<a class="btn btn-primary btn-sm text-white" href="create.php" role="button">Add User </a>
+									<a class="btn btn-primary btn-sm text-white" href="create.php" role="button">Add Service </a>
 								</div>
 								<div class="table-responsive">
 									<?php
@@ -65,7 +65,7 @@
 										$sms = $_GET['sms'];
 
 										if($sms == 'deleted'){
-											echo '<div class="alert alert-success">User deleted successfully</div>';
+											echo '<div class="alert alert-success">Service deleted successfully</div>';
 											echo "<meta http-equiv=\"refresh\" content=\"2;URL=index.php\">";
 											
 										}
@@ -79,26 +79,24 @@
 										<thead>
 											<tr>
 												<th class="col">#</th>
-												<th class="col">Name</th>
-												<th class="col">Phone</th>
-												<th class="col">Address</th>
-												<th class="col">Email</th>
+												<th class="col">Icon</th>
+												<th class="col">Title</th>
+												<th class="col">Description</th>
 												<th class="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
-											$select = "SELECT *FROM users";
+											$select = "SELECT *FROM services";
 											$select_result = mysqli_query($conn, $select);
 											$i = 1;
 											while ($data = mysqli_fetch_array($select_result)) {
 											?>
 												<tr>
 													<td class="cell"><?php echo $i++; ?></td>
-													<td class="cell"><?php echo $data['name']; ?> </td>
-													<td class="cell"><?php echo $data['phone']; ?></td>
-													<td class="cell"><?php echo $data['address']; ?></td>
-													<td class="cell"><?php echo $data['email']; ?></td>
+													<td class="cell"> <i class="<?php echo $data['icon']; ?>"></i> </td>
+													<td class="cell"><?php echo $data['title']; ?> </td>
+													<td class="cell"><?php echo $data['description']; ?></td>
 													<td class="cell">
 														<a class="btn btn-sm btn-secondary" href="edit.php?id=<?php echo $data['id']; ?>">Edit</a>
 														<a class="btn btn-sm btn-info" href="show.php?id=<?php echo $data['id']; ?>">View</a>

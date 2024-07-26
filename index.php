@@ -1,4 +1,4 @@
-<?php include('includes/header.php') ;?>
+<?php include('includes/header.php'); ?>
 
 <body>
 
@@ -7,12 +7,17 @@
     <div class="container-fluid d-flex">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>Ninestars</span></a></h1>
+        <?php
+        $select = "SELECT *FROM users";
+        $select_result = mysqli_query($conn, $select);
+        $data = mysqli_fetch_assoc($select_result);
+        ?>
+        <h1 class="text-light"><a href="index.html"><span><?php echo $data['name']; ?></span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
-      <?php include('includes/navbar.php') ;?>
+      <?php include('includes/navbar.php'); ?>
       <!-- .nav-menu -->
 
     </div>
@@ -79,37 +84,22 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+          <?php
+          $select = "SELECT *FROM services";
+          $select_result = mysqli_query($conn, $select);
+          $i = 1;
+          while ($data = mysqli_fetch_array($select_result)) {
+          ?>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon-box">
+                <div class="icon"><i class="<?php echo $data['icon'] ?>"></i></div>
+                <h4 class="title"><a href=""><?php echo $data['title'] ?></a></h4>
+                <p class="description"><?php echo $data['description'] ?></p>
+              </div>
             </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-            </div>
-          </div>
+          <?php
+          }
+          ?>
 
         </div>
 
@@ -526,4 +516,4 @@
 
   </main><!-- End #main -->
 
-  <?php include('includes/footer.php') ;?>
+  <?php include('includes/footer.php'); ?>
